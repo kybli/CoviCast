@@ -53,3 +53,40 @@ for x in stateArray:
 
 #export data. Right now no changes are made so no need
 confData.to_sql(name = 'confirmed', con = engine, if_exists = 'replace', index = False)
+
+
+
+
+
+
+
+
+
+import pandas as pd 
+import numpy as np
+from matplotlib import pyplot as plt
+
+from sklearn.linear_model import LogisticRegression
+
+d = []
+r = []
+
+for x in stateArray:
+    if (x.name != 'New York'):
+        for idx in range(len(x.data)):
+            #d.append([idx,x.popDensity,x.data[0],x.data[len(x.data)-1]])
+            d.append(idx)
+            r.append(x.data[idx]/x.popDensity)
+
+d = np.reshape(d, (np.shape(d)[0], -1))
+
+from sklearn import preprocessing
+from sklearn import utils
+
+lab_enc = preprocessing.LabelEncoder()
+encoded = lab_enc.fit_transform(r)
+
+model = LogisticRegression()
+model.fit(d, encoded)
+
+print(model.score(d,r))
