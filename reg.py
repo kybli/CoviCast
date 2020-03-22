@@ -2,14 +2,14 @@ import numpy as np
 from scipy.optimize import curve_fit
 from compute_data import getStateData
 
-#func calculates a y value given x and the variables of an exponential function
-def func(x, a, b, c):
+#exponential takes an x value and three parameters of an exponential function and returns a corresponding y value
+def exponential(x, a, b, c):
     return a * np.exp(b * x) + c
 
-#fitData develops the virus transmission model using data from the database and returns the variables for the exponential model equation
+#fitData develops the virus transmission model using data from the database and returns the exponential model parameters in an array
 def fitData():
-    day = []    #holds day index
-    mean = []   #holds mean number of cases of all states on given day index
+    days = []    #holds day index
+    means = []   #holds mean number of cases of all states on given day index
     statesOnDay = []    # holds number of states that have data on a given day index
 
     stateArray = getStateData() #populate stateArray with data from database
@@ -17,30 +17,30 @@ def fitData():
     #iterate through all states
     for state in stateArray:
 
-        #eliminate New York. It is an outlier due to its severe lack in testing capability for the first two weeks.
-        if (state.name != 'New York'):
+        #eliminate New York. It is an outlier due to its severe lack in testing capacity during the first two weeks.
+        if (state.stateName != 'New York'):
 
             #iterate through days in state data
             for idx in range(len(state.data)):
                 
                 #if day isnt accounted for in mean array yet, add it to a new index in the array
-                if (idx >= len(mean)):
-                    mean.append(0)
+                if (idx >= len(means)):
+                    means.append(0)
                     statesOnDay.append(0)
-                    day.append(idx)
+                    days.append(idx)
 
                 #sum confirmed cases (normalized by state population density) on day idx
-                mean[idx] = mean[idx] + (state.data[idx]/state.popDensity)
+                means[idx] = means[idx] + (state.data[idx]/state.populationDensity)
                 statesOnDay[idx] = statesOnDay[idx] + 1
 
     #calculate average confirmed cases on each day      
-    for idx in range(len(mean)):
-        mean[idx] = mean[idx] / statesOnDay[idx]
+    for idx in range(len(means)):
+        means[idx] = means[idx] / statesOnDay[idx]
 
-    #reformat day list
-    day = np.array(day)
+    #reformat days list
+    days = np.array(days)
 
     #fit curve
-    popt, pcov = curve_fit(func, day, mean)
+    popt, pcov = curve_fit(exponential, days, means)
 
     return popt

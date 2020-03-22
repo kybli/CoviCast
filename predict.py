@@ -1,13 +1,13 @@
-from reg import fitData, func
+from reg import fitData, exponential
 from matplotlib import pyplot as plt
 
-#save variables for virus model to modelVars
+#save parameters for virus model to modelVars
 modelVars = fitData()
 
 #predict function returns a predicted number of covid-19 cases for a population density of 'popDensity' on day 'inputDay'
 #inputs: inputDay, popDensity
 def predict(inputDay, popDensity):
-    return func(inputDay, modelVars[0], modelVars[1], modelVars[2]) * popDensity
+    return exponential(inputDay, modelVars[0], modelVars[1], modelVars[2]) * popDensity
 
 #plots projected covid-19 transmission over time. Output plot is saved as output.pdf
 #inputs: inputDay, popDensity
@@ -32,7 +32,7 @@ def plot(inputDay, popDensity):
     plt.plot(days, predY, color='lightblue', linewidth=3)
     plt.plot([inputDay], predY[inputDay], color='darkblue', marker='o')
     plt.xlim(0, dayRange - 1)
-    plt.title("Covid-19 Transmission Projection for Population Density of " + str(popDensity) + " people/sqmi")
+    plt.title("Covid-19 Transmission Projection\nfor Population Density of " + str(popDensity) + " people/square mile")
     plt.xlabel("Days Since First Case")
     plt.ylabel("Number of Confirmed Cases")
     
