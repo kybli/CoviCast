@@ -80,8 +80,7 @@ Population Density = **112.8204**
 |           3/14/19          |            4            |                57                |
 |           3/15/19          |            5            |                72                |
 |           3/16/19          |            6            |                85                |
-|           3/17/19          |            7            |                110 
-&nbsp;
+|           3/17/19          |            7            |                110               |
 ### Sources
 The model built for this project uses data provided by Johns Hopkins' Center for Systems Science and Engineering and the World Population Review.
 
