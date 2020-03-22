@@ -73,16 +73,16 @@ Population Density = **112.8204**
 
 
 **Actual Texas covid-19 data**
-| Date (Not used in program) | Day (input for program) | # of cases (Compare with output) |
-|----------------------------|-------------------------|----------------------------------|
-|           3/10/19          |            0            |                13                |
-|           3/11/19          |            1            |                21                |
-|           3/12/19          |            2            |                27                |
-|           3/13/19          |            3            |                43                |
-|           3/14/19          |            4            |                57                |
-|           3/15/19          |            5            |                72                |
-|           3/16/19          |            6            |                85                |
-|           3/17/19          |            7            |                110               |
+| Date  |  # of cases (Compare with output) |
+|----------------------------|----------------------------------|
+|           3/10/19 (Start Date)          |                13                |
+|           3/11/19          |                21                |
+|           3/12/19          |                27                |
+|           3/13/19          |                43                |
+|           3/14/19          |                57                |
+|           3/15/19          |                72                |
+|           3/16/19          |                85                |
+|           3/17/19          |                110               |
 ### Sources
 The model built for this project uses data provided by Johns Hopkins' Center for Systems Science and Engineering and the World Population Review.
 
