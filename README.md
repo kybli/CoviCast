@@ -66,9 +66,11 @@ After downloading the repository, you will notice that there are several files.
 #### Testing
 Usage: Provided below is the population density of Texas and its recorded number of covid-19 cases per day the first case was detected there. Change the population density in the test file (or the last section of the notebook if you are using option 2) to Texas' population density provided below. Then run the test program several times, incrementing the day variable and comparing the predicted output with the actual data on each day in Texas provided below.
 
+
 **Texas population density:**
 
 Population Density = **112.8204**
+
 
 **Actual Texas covid-19 data**
 | Date (Not used in program) | Day (input for program) | # of cases (Compare with output) |
