@@ -31,9 +31,9 @@ if (inputContinue == 'y' or inputContinue == 'yes'):
         startDateObj = datetime.strptime(inputStartDate, '%m/%d/%y')
 
         inputTargetDate = input("Enter the target date for which you are predicting the number of covid-19 cases [in the format mm/dd/yy]: ")
-        targettDateObj = datetime.strptime(inputTargetDate, '%m/%d/%y')
+        targetDateObj = datetime.strptime(inputTargetDate, '%m/%d/%y')
 
-        datesDifference = targettDateObj - startDateObj
+        datesDifference = targetDateObj - startDateObj
 
         if (datesDifference.days < 0):
             print("Your start date cannot occur after your target date. Please retry.\n\n")
@@ -50,11 +50,11 @@ if (inputContinue == 'y' or inputContinue == 'yes'):
             break
 
     #create plot
-    plot(datesDifference.days, inputPopulationDensity)
+    plot(datesDifference.days, inputPopulationDensity, startDateObj, targetDateObj)
 
     #return results
     print("\n\n\n\n\n")
-    print("There will be approximately "  + str(int(predict(datesDifference.days, inputPopulationDensity))) + " covid-19 cases on " + targettDateObj.strftime("%m/%d/%Y"))
+    print("There will be approximately "  + str(int(predict(datesDifference.days, inputPopulationDensity))) + " covid-19 cases on " + targetDateObj.strftime("%m/%d/%Y"))
     print("\nCovid-19 projection successfully saved as a pdf in your project directory")
 
 else:

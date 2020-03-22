@@ -1,5 +1,7 @@
 from reg import fitData, exponential
 from matplotlib import pyplot as plt
+from datetime import date, datetime, timedelta
+import matplotlib.ticker as ticker
 
 #save parameters for virus model to modelVars
 modelVars = fitData()
@@ -11,7 +13,7 @@ def predict(inputDay, popDensity):
 
 #plots projected covid-19 transmission over time. Output plot is saved as output.pdf
 #inputs: inputDay, popDensity
-def plot(inputDay, popDensity):
+def plot(inputDay, popDensity, startDateObj, targetDateObj):
     days = []   #day index
     predY = []  #predicted number of covid-19 cases on each day represented by index
 
@@ -22,10 +24,10 @@ def plot(inputDay, popDensity):
 
     #populate day array
     for day in range(dayRange):
-        days.append(day)
+        days.append((startDateObj + timedelta(days = day)).strftime("%m/%d/%Y"))
 
     #populate predY array with predicted values
-    for day in days:
+    for day in range(dayRange):
         predY.append(predict(day,popDensity))
 
     #plot configuration
@@ -33,11 +35,18 @@ def plot(inputDay, popDensity):
     plt.plot([inputDay], predY[inputDay], color='darkblue', marker='o')
     plt.xlim(0, dayRange - 1)
     plt.title("Covid-19 Transmission Projection\nfor Population Density of " + str(popDensity) + " people/square mile")
-    plt.xlabel("Days Since First Case")
+    plt.xlabel("Dates Since First Case")
     plt.ylabel("Number of Confirmed Cases")
+    plt.xticks(rotation=90)
+    plt.locator_params(axis='x', nbins=10)
+
+    # Pad margins so that markers don't get clipped by the axes
+    plt.margins(0.2)
+    # Tweak spacing to prevent clipping of tick-labels
+    plt.subplots_adjust(bottom=0.25)
     
     #label the data point representing the day specified by the user
-    label = "    Day: " + str(inputDay) + ", Cases: " + str(int(predY[inputDay]))
+    label = "    Day: " + targetDateObj.strftime("%m/%d/%Y") + ", Cases: " + str(int(predY[inputDay]))
     plt.annotate(label, xy =(inputDay, predY[inputDay]) )
     
     #export output
