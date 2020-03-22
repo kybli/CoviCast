@@ -15,7 +15,6 @@ def predict(inputDay, popDensity):
 #inputs: inputDay, popDensity
 def plot(inputDay, popDensity, startDateObj, targetDateObj):
     days = []   #day index
-    numberedDays = []
     predY = []  #predicted number of covid-19 cases on each day represented by index
 
     #create a domain for the graph that spans double the input Day and atleast 20 days
@@ -26,22 +25,19 @@ def plot(inputDay, popDensity, startDateObj, targetDateObj):
     #populate day array
     for day in range(dayRange):
         days.append((startDateObj + timedelta(days = day)).strftime("%m/%d/%Y"))
-        numberedDays.append(day)
 
     #populate predY array with predicted values
     for day in range(dayRange):
         predY.append(predict(day,popDensity))
 
     #plot configuration
+    plt.plot(days, predY, color='lightblue', linewidth=3)
+    plt.plot([inputDay], predY[inputDay], color='darkblue', marker='o')
     plt.xlim(0, dayRange - 1)
     plt.title("Covid-19 Transmission Projection\nfor Population Density of " + str(popDensity) + " people/square mile")
     plt.xlabel("Dates Since First Case")
     plt.ylabel("Number of Confirmed Cases")
-    plt.xticks(rotation = 90)
-    plt.plot(days, predY, color='lightblue', linewidth=3)
-    plt.plot([inputDay], predY[inputDay], color='darkblue', marker='o')
-
-
+    plt.xticks(rotation=90)
     # Pad margins so that markers don't get clipped by the axes
     plt.margins(0.2)
     # Tweak spacing to prevent clipping of tick-labels
