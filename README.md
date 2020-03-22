@@ -30,9 +30,9 @@ The predictive analysis model used by the program is trained on the timeseries d
 There are two options for using this project. The first is to run it in your terminal and output the visual into a separate file. The second is to run it using Jupyter Notebook. **The second option is recommended because it is more easy to view the output.**
 
 **Option 1:**
-After downloading the repository, you will notice that there are several files. **initDB .py** initializes a local SQL database called c19DB. **populateDB .py** converts the csv data for confirmed covid-19 cases in each state and the csv for population density of each state into two tables within the c19DB database. These tables are titled 'confirmed' and 'populationData' respectively. **compute_data .py** processes the data from the database into a format that **reg .py** can use to compute a model for the virus transmission. **predict .py** contains functions required to make predictions using the model and **test .py** uses those functions to allow the user to create a projection with the model.
+After downloading the repository, you will notice that there are several files. **initDB.py** initializes a local SQL database called c19DB. **populateDB.py** converts the csv data for confirmed covid-19 cases in each state and the csv for population density of each state into two tables within the c19DB database. These tables are titled 'confirmed' and 'populationData' respectively. **compute_data.py** processes the data from the database into a format that **reg.py** can use to compute a model for the virus transmission. **predict.py** contains functions required to make predictions using the model and **test.py** uses those functions to allow the user to create a projection with the model.
 
-1. Open the file **init .py** and change the host, user, and password used for establishing a connection with the server so that they match your local server's host, user, and password. This information is located in the first few lines of the file that resemble the code below. After making changes, save the file.
+1. Open the file **init.py** and change the host, user, and password used for establishing a connection with the server so that they match your local server's host, user, and password. This information is located in the first few lines of the file that resemble the code below. After making changes, save the file.
 
         host = "localhost",
         user = "root",
@@ -42,7 +42,7 @@ After downloading the repository, you will notice that there are several files. 
 
         python init.py
 
-3. *In your terminal,* run test .py by executing:
+3. *In your terminal,* run test.py by executing:
 
         python test.py
 
