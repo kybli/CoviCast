@@ -18,24 +18,25 @@ def plot(inputDay, popDensity, startDateObj, targetDateObj):
     predY = []  #predicted number of covid-19 cases on each day represented by index
 
     #create a domain for the graph that spans double the input Day and atleast 20 days
-    dayRange = inputDay * 2
-    if (dayRange < 20):
-        dayRange = 20
+    dayRangeEnd = inputDay + 11
+    dayRangeStart = inputDay - 10
+    if (inputDay < 10):
+        dayRangeEnd = 20
+        dayRangeStart = 0
 
-    #populate day array
-    for day in range(dayRange):
+    
+    for day in range(dayRangeStart,dayRangeEnd):
+        #populate day array
         days.append((startDateObj + timedelta(days = day)).strftime("%m/%d/%Y"))
-
-    #populate predY array with predicted values
-    for day in range(dayRange):
+        
+        #populate predY array with predicted values
         predY.append(predict(day,popDensity))
 
     #plot configuration
     plt.plot(days, predY, color='lightblue', linewidth=3)
-    plt.plot([inputDay], predY[inputDay], color='darkblue', marker='o')
-    plt.xlim(0, dayRange - 1)
+    plt.xlim(0, dayRangeEnd - dayRangeStart - 1)
     plt.title("Covid-19 Transmission Projection\nfor Population Density of " + str(popDensity) + " people/square mile")
-    plt.xlabel("Dates Since First Case")
+    plt.xlabel("Dates")
     plt.ylabel("Number of Confirmed Cases")
     plt.xticks(rotation=90)
     # Pad margins so that markers don't get clipped by the axes
@@ -44,8 +45,18 @@ def plot(inputDay, popDensity, startDateObj, targetDateObj):
     plt.subplots_adjust(bottom=0.25)
     
     #label the data point representing the day specified by the user
-    label = "    Day: " + targetDateObj.strftime("%m/%d/%Y") + ", Cases: " + str(int(predY[inputDay]))
-    plt.annotate(label, xy =(inputDay, predY[inputDay]) )
-    
+    if (inputDay < 10):
+        plt.plot([inputDay], predY[inputDay], color='darkblue', marker='o')
+        caseOutput = predY[inputDay]
+        dayLabelX = inputDay
+
+    else:
+        plt.plot([10], predY[10], color='darkblue', marker='o')
+        caseOutput = predY[10]
+        dayLabelX = 10
+
+    label = "    Day: " + targetDateObj.strftime("%m/%d/%Y") + ", Cases: " + str(int(caseOutput))
+    plt.annotate(label, xy =(dayLabelX, caseOutput) )
+
     #export output
     plt.savefig('output.pdf')
