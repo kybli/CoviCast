@@ -44,9 +44,9 @@ After downloading the repository, you will notice that there are several files.
         "passwd": "input your password here"
         }
 
-2. *In your terminal,* run init.py by executing:
+2. *In your terminal, first navigate to the project directory.* Then run initDB.py by executing:
 
-        python init.py
+        python initDB.py
 
 3. *In your terminal,* run populateDB.py by executing:
 
@@ -56,9 +56,9 @@ After downloading the repository, you will notice that there are several files.
 
         python runPredict.py
 
-5. Follow the instructions in the program to compute your output
+5. Follow the instructions provided by the program in your terminal to compute your output
 
-6. The output will then be saved as a separate file called **output.pdf** in the same directory as the project.
+6. The output will then be saved as a separate file called **output.pdf** in the same directory as the project in your file system.
 
     *Further down in this file, there is a 'Testing' section where you can find population density and covid-19 data for the state of Texas to test the project against*
 
