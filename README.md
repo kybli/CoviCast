@@ -1,4 +1,4 @@
-# C19
+# CoviCast
 By: Kyle Li
 
 -----
